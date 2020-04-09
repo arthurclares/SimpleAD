@@ -88,7 +88,7 @@
             "metadata": {
                 "description": "Github template URL."
             },
-            "defaultValue": "https://github.com/Azure/azure-quickstart-templates/blob/master/active-directory-new-domain/"
+            "defaultValue": "[deployment().properties.templateLink.uri]"
         },
         "_artifactsLocationSasToken": {
             "type": "securestring",
