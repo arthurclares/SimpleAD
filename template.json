@@ -146,7 +146,7 @@
             "properties": {
                 "publicIPAllocationMethod": "[parameters('publicIPAddressType')]",
                 "dnsSettings": {
-                    "domainNameLabel": "[parameters('virtualMachineName')]"
+                    "domainNameLabel": "advm"
                 }
             }
         },
