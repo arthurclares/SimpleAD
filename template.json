@@ -96,7 +96,17 @@
                 "description": "Auto-generated token to access _artifactsLocation. Leave it blank unless you need to provide your own value."
             },
             "defaultValue": ""
+        },
+        "publicIPAddressType": {
+            "type": "string",
+            "defaultValue": "Dynamic",
+            "metadata": {
+                "description": "Type of public IP address"
+            }
         }
+    },
+    "variables": {
+        "publicIPAddressName": "publicIp1"
     },
     "resources": [
         {
@@ -129,6 +139,18 @@
             }
         },
         {
+            "apiVersion": "2015-06-15",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "[variables('publicIPAddressName')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "publicIPAllocationMethod": "[parameters('publicIPAddressType')]",
+                "dnsSettings": {
+                    "domainNameLabel": "[parameters('virtualMachineName')]"
+                }
+            }
+        },
+        {
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2019-02-01",
             "name": "[parameters('networkInterfaceName')]",
@@ -141,6 +163,9 @@
                     {
                         "name": "ipconfig1",
                         "properties": {
+                            "publicIPAddress": {
+                                "id": "[resourceId ('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]"
+                            },
                             "privateIPAllocationMethod": "Static",
                             "privateIPAddress": "[parameters('privateIPAddress')]",
                             "subnet": {
