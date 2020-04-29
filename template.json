@@ -144,10 +144,7 @@
             "name": "[variables('publicIPAddressName')]",
             "location": "[parameters('location')]",
             "properties": {
-                "publicIPAllocationMethod": "[parameters('publicIPAddressType')]",
-                "dnsSettings": {
-                    "domainNameLabel": "advm"
-                }
+                "publicIPAllocationMethod": "[parameters('publicIPAddressType')]"
             }
         },
         {
